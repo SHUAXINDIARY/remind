@@ -1,4 +1,5 @@
 import Axios from "axios";
+import DayJs from "dayjs";
 
 const sendMsg = ({ text }) => {
   Axios.post(
@@ -12,4 +13,9 @@ const sendMsg = ({ text }) => {
   );
 };
 
-sendMsg({ text: '<at user_id="all">所有人</at>  别卷了，下班下班' });
+const init = () => {
+  // sendMsg({ text: '<at user_id="all">所有人</at>  别卷了，下班下班' });
+  console.log(DayJs().format("YYYY-MM-DD"));
+};
+
+init();
