@@ -12,10 +12,31 @@ const sendMsg = ({ text }) => {
     }
   );
 };
-
+const endWork = "21:00";
 const init = () => {
-  // sendMsg({ text: '<at user_id="all">所有人</at>  别卷了，下班下班' });
   console.log(DayJs().format("YYYY-MM-DD"));
+  const isFriday = DayJs().day() === 5;
+  const hour = DayJs().hour();
+  const minute = DayJs().minute();
+  //   周五提醒
+  if (isFriday) {
+    if (hour === 9) {
+      sendMsg({ text: "今天周五，别太卷了" });
+    }
+    //   三小时倒计时
+    if (21 - hour === 3) {
+      sendMsg({ text: "还有三小时下班" });
+    }
+    if (21 - hour === 1) {
+      sendMsg({ text: "还有一小时下班" });
+    }
+    //   下班提醒
+    if (isFriday && `${hour}:${minute}` === endWork) {
+      sendMsg({ text: '<at user_id="all">所有人</at>  别卷了，下班下班' });
+    }
+  }
 };
 
-init();
+setTimeout(() => {
+  init();
+}, 1000);
